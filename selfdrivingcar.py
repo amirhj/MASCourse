@@ -56,7 +56,11 @@ class SelfDrivingCar:
                     clocks += 1
 
                 if self.car.sensors.isHit():
-                    print "car hit"
+                    print "Car hit"
+                    break
+
+                if self.car.sensors.isInDestination():
+                    print "Car reached the goal!"
                     break
 
                 if delayTime > 0:

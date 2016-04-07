@@ -4,11 +4,12 @@ from sensors import Sensors
 
 class LearningAgent:
 
-    def __init__(self, sensors, actuators, learning_rate, discount_factor):
+    def __init__(self, sensors, actuators, learning_rate, discount_factor, epsilon):
         self.sensors = sensors
         self.actuators = actuators
         self.learning_rate = learning_rate
         self.discount_factor = discount_factor
+        self.epsilon = epsilon
 
         self.qvalues = Counter()
 

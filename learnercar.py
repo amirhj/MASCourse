@@ -1,17 +1,22 @@
 from learnignagent import LearningAgent
+import util
+import random
 
 EPISODES_OF_LEARNING = 10
 EPISODES_OF_TESTING = 10
 RESULT_PER_EPISODE = 1
+TIME_OUT = 100
+
+# *** Learning Parameters ****
 LEARNING_RATE = 0.9
 DISCOUNT_FACTOR = 0.8
-TIME_OUT = 100
+EPSILON = 0.9
 
 
 class LearnerCar(LearningAgent):
 
     def __init__(self, actuators, sensors):
-        LearningAgent.__init__(self, sensors, actuators, LEARNING_RATE, DISCOUNT_FACTOR)
+        LearningAgent.__init__(self, sensors, actuators, LEARNING_RATE, DISCOUNT_FACTOR, EPSILON)
 
         """
         Put your code here if you want to do something before start of learning.
@@ -30,7 +35,11 @@ class LearnerCar(LearningAgent):
         """
         This function updates Q-Values ny given parameters.
         """
-        pass
+        nextQ = []
+        for a in self.getActions():
+            nextQ.append(self.qvalues[(nextState, a)])
+        sample = reward + self.discount_factor * max(nextQ)
+        self.qvalues[(state, action)] = self.qvalues[(state, action)]*(1-self.learning_rate) + self.learning_rate*sample
 
     def getState(self):
         """
@@ -57,9 +66,14 @@ class LearnerCar(LearningAgent):
         Given state what is the proper action according to Q-values. Use self.qvalues to access them.
         This function should return proper action. Type of actions is string.
         """
-
-        # YOUR CODE HERE
-        return None
+        nextQ = util.Counter()
+        for a in self.getActions():
+            nextQ[a] = self.qvalues[(state, a)]
+        if util.flipCoin(self.epsilon):
+            return nextQ.argMax()
+        else:
+            del nextQ[nextQ.argMax()]
+            return random.choice(nextQ.keys())
 
     def getReward(self, state, action, nextState):
         """
@@ -70,3 +84,20 @@ class LearnerCar(LearningAgent):
         # YOUR CODE HERE
         return None
 
+    def episodTerminationEvent(self):
+        """
+        This method is called after termination of each episode of learning.
+        If you want to do something do it here or let it empty.
+        """
+
+        # YOUR CODE HERE
+        pass
+
+    def learningTerminationEvent(self):
+        """
+        This method is called after termination of learning.
+        If you want to do something do it here or let it empty.
+        """
+
+        # YOUR CODE HERE
+        pass
