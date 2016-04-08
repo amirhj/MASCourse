@@ -2,6 +2,7 @@ from learnignagent import LearningAgent
 import util
 import random
 
+# **** Running Parameters ****
 EPISODES_OF_LEARNING = 10
 EPISODES_OF_TESTING = 10
 RESULT_PER_EPISODE = 1
@@ -17,11 +18,15 @@ class LearnerCar(LearningAgent):
 
     def __init__(self, actuators, sensors):
         LearningAgent.__init__(self, sensors, actuators, LEARNING_RATE, DISCOUNT_FACTOR, EPSILON)
+        self.init()
 
+    def init(self):
         """
         Put your code here if you want to do something before start of learning.
         """
+
         # YOUR CODE HERE
+        pass
 
     def getActions(self):
         """

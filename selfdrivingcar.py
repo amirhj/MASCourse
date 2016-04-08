@@ -69,6 +69,9 @@ class SelfDrivingCar:
                 self.env.checkCollision()
                 self.gui.update()
 
+            if clocks == TIME_OUT:
+                print 'Time out occurred'
+
             self.episodes += 1
         self.gui.window.destroy()
         sys.exit()

@@ -26,7 +26,7 @@ class Actuators:
         if self.car.sim:
             self.car.simulate()
 
-    def brake(self):
+    def c(self):
         self.car.brake()
         if self.car.sim:
             self.car.simulate()
