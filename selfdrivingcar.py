@@ -37,7 +37,7 @@ class SelfDrivingCar:
             else:
                 self.gui.turnOff()
 
-            self.env.mainCar.putOnSteetEnd(((1,3),(2,3)), 'N')
+            self.env.mainCar.reset()
 
             clocks = 0
             while clocks < TIME_OUT:

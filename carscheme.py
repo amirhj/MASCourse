@@ -30,7 +30,7 @@ class CarScheme:
         self.image = PIL.Image.open('images/car.png').resize(self.size, PIL.Image.ANTIALIAS)
         self.fimage = PIL.Image.open('images/car.png').resize(self.size, PIL.Image.ANTIALIAS)
         self.canvas = canvas
-        self.position = self.fposition = position
+        self.position = position
         self.fposition = (position[0], position[1])
         self.imgOnCanvas = None
         self.ofset = (0, -2)
@@ -49,6 +49,27 @@ class CarScheme:
         self.queue = Queue()
 
         self.actions = ['RIGHT', 'LEFT', 'STRAIGHT', 'BRAKE']
+
+    def reset(self):
+        self.size = (13, int(13 * 263 / 140))
+        self.image = PIL.Image.open('images/car.png').resize(self.size, PIL.Image.ANTIALIAS)
+        self.fimage = PIL.Image.open('images/car.png').resize(self.size, PIL.Image.ANTIALIAS)
+        self.position = self.fposition
+        self.imgOnCanvas = None
+        self.ofset = (0, -2)
+        self.angle = 180
+        self.sim = False
+        self.hit = False
+
+        self.street = None
+        self.posInStreet = 0
+        self.direction = None
+        self.lane = None
+        self.streetBlock = None
+        self.guiState = None
+        self.queue = Queue()
+
+        self.putOnSteetEnd(((1,3),(2,3)), 'N')
 
     def clone(self):
         car = copy.copy(self)
