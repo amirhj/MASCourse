@@ -69,7 +69,7 @@ class CarScheme:
         self.guiState = None
         self.queue = Queue()
 
-        self.putOnSteetEnd(((1,3),(2,3)), 'N')
+        self.putOnSteetHead(((1,3),(2,3)), 'N')
 
     def clone(self):
         car = copy.copy(self)
